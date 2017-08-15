@@ -5,6 +5,7 @@ $(document).ready(function(){
   let heldPiece = null;
   canvas.addEventListener('mousedown', clientMouseDown);
   canvas.addEventListener('mousemove', clientMouseMove);
+  canvas.addEventListener('mouseup', clientMouseUp);
   setInterval(function() {
     mainLoop();
   }, 50);
@@ -23,6 +24,10 @@ $(document).ready(function(){
       heldPiece.yPos = (e.y - (heldPiece.height / 2));
       console.log(heldPiece.xPos);
     }
+  }
+
+  function clientMouseUp(e) {
+    heldPiece = null;
   }
 
 });
