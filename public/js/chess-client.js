@@ -1,21 +1,22 @@
 $(document).ready(function(){
   const canvas = $('.game-canvas').get(0);
   const context = canvas.getContext('2d');
-  let chessBoard = new ChessBoard;
+  let chessGame = new ChessGame;
   let heldPiece = null;
   canvas.addEventListener('mousedown', clientMouseDown);
   canvas.addEventListener('mousemove', clientMouseMove);
   canvas.addEventListener('mouseup', clientMouseUp);
+  canvas.addEventListener('mouseout', clientMouseOut);
   setInterval(function() {
     mainLoop();
   }, 50);
 
   function mainLoop() {
-    chessBoard.drawBoard(context);
+    chessGame.drawGame(context);
   }
 
   function clientMouseDown(e) {
-    heldPiece = chessBoard.board[Math.floor(e.y / chessBoard.tileSize)][Math.floor(e.x / chessBoard.tileSize)];
+    heldPiece = chessGame.board[Math.floor(e.y / chessGame.tileSize)][Math.floor(e.x / chessGame.tileSize)];
   }
 
   function clientMouseMove(e) {
@@ -28,6 +29,12 @@ $(document).ready(function(){
 
   function clientMouseUp(e) {
     heldPiece = null;
+    chessGame.initializePieces();
+  }
+
+  function clientMouseOut(e) {
+    heldPiece = null;
+    chessGame.initializePieces();
   }
 
 });
