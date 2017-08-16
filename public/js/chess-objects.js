@@ -53,7 +53,14 @@ ChessGame = function() {
     }
     for (y = 0; y < 8; y+=1) {
       for(x = 0; x < 8; x+=1) {
-        if(this.board[y][x] != null) {
+        if(this.board[y][x] != null && !this.board[y][x].held) {
+          this.board[y][x].drawPiece(context);
+        }
+      }
+    }
+    for (y = 0; y < 8; y+=1) {
+      for(x = 0; x < 8; x+=1) {
+        if(this.board[y][x] != null && this.board[y][x].held) {
           this.board[y][x].drawPiece(context);
         }
       }
@@ -71,6 +78,7 @@ Piece = function(newType, newColor, xPos, yPos) {
   this.width = 70;
   this.img = new Image();
   this.img.src = "images/" + this.color + "-" + this.type + ".png";
+  this.held = false;
 
   this.drawPiece = function (context) {
     context.drawImage(this.img, this.xPos, this.yPos, this.height, this.width);

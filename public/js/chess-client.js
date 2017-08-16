@@ -17,24 +17,30 @@ $(document).ready(function(){
 
   function clientMouseDown(e) {
     heldPiece = chessGame.board[Math.floor(e.y / chessGame.tileSize)][Math.floor(e.x / chessGame.tileSize)];
+    heldPiece.held = true;
   }
 
   function clientMouseMove(e) {
     if(heldPiece!=null){
       heldPiece.xPos = (e.x - (heldPiece.width / 2));
       heldPiece.yPos = (e.y - (heldPiece.height / 2));
-      console.log(heldPiece.xPos);
     }
   }
 
   function clientMouseUp(e) {
-    heldPiece = null;
-    chessGame.initializePieces();
+    if(heldPiece!=null){
+      heldPiece.held = false;
+      heldPiece = null;
+      chessGame.initializePieces();
+    }
   }
 
   function clientMouseOut(e) {
-    heldPiece = null;
-    chessGame.initializePieces();
+    if(heldPiece!=null){
+      heldPiece.held = false;
+      heldPiece = null;
+      chessGame.initializePieces();
+    }
   }
 
 });
