@@ -31,7 +31,7 @@ $(document).ready(function(){
     if(heldPiece!=null){
       heldPiece.held = false;
       heldPiece = null;
-      chessGame.initializePieces();
+      chessGame.resetPieces();
     }
   }
 
@@ -39,7 +39,7 @@ $(document).ready(function(){
     if(heldPiece!=null){
       heldPiece.held = false;
       heldPiece = null;
-      chessGame.initializePieces();
+      chessGame.resetPieces();
     }
   }
 

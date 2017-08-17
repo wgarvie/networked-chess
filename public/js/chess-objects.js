@@ -7,13 +7,12 @@ ChessGame = function() {
   for(let i = 0; i < this.board.length; i++) {
     this.board[i] = new Array(8).fill(null);
   }
-
-  this.initializePieces = function() {
+  this.initializeBoard = function() {
     for(let x = 0; x < 8; x++) {
       const xPos = (75*x)+2;
       let yPos = y => (75 * y) + 2;
-      this.board[1][x] = new Piece("pawn", "black", xPos, yPos(1));
-      this.board[6][x] = new Piece("pawn", "white", xPos, yPos(6));
+      this.board[1][x] = new Pawn("pawn", "black", xPos, yPos(1));
+      this.board[6][x] = new Pawn("pawn", "white", xPos, yPos(6));
       switch(x) {
         case 0:
         case 7:
@@ -41,8 +40,7 @@ ChessGame = function() {
       }
     }
   }
-
-  this.initializePieces();
+  this.initializeBoard();
 
   this.drawGame = function(context) {
     for (y = 0; y < 8; y+=1) {
@@ -67,6 +65,17 @@ ChessGame = function() {
     }
   }
 
+  this.resetPieces = function() {
+    for (y = 0; y < 8; y+=1) {
+      for(x = 0; x < 8; x+=1) {
+        if(this.board[y][x] != null) {
+          this.board[y][x].xPos = (75*x) + 2;
+          this.board[y][x].yPos = (75*y) + 2;
+        }
+      }
+    }
+  }
+
 }
 
 Piece = function(newType, newColor, xPos, yPos) {
@@ -83,4 +92,16 @@ Piece = function(newType, newColor, xPos, yPos) {
   this.drawPiece = function (context) {
     context.drawImage(this.img, this.xPos, this.yPos, this.height, this.width);
   }
+
 }
+
+Pawn = function() {
+  Piece.call(this);
+  this.img.src = "images/" + "black" + "-" + "pawn" + ".png";
+
+  this.drawPiece = function (context) {
+    context.drawImage(this.img, this.xPos, this.yPos, this.height, this.width);
+  }
+
+}
+Pawn.prototype = Object.create(Piece.prototype);
