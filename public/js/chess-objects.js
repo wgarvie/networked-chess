@@ -69,8 +69,8 @@ ChessGame = function() {
     for (y = 0; y < 8; y+=1) {
       for(x = 0; x < 8; x+=1) {
         if(this.board[y][x] != null) {
-          this.board[y][x].xPos = (75*x) + 2;
-          this.board[y][x].yPos = (75*y) + 2;
+          this.board[y][x].xPos = (this.tileSize*x) + 2;
+          this.board[y][x].yPos = (this.tileSize*y) + 2;
         }
       }
     }
@@ -96,6 +96,7 @@ Piece = function(newColor, xPos, yPos) {
 Pawn = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "pawn" + ".png";
+  this.initialMove = true;
 }
 Pawn.prototype = Object.create(Piece.prototype);
 

@@ -17,7 +17,9 @@ $(document).ready(function(){
 
   function clientMouseDown(e) {
     heldPiece = chessGame.board[Math.floor(e.y / chessGame.tileSize)][Math.floor(e.x / chessGame.tileSize)];
-    heldPiece.held = true;
+    if(heldPiece != null) {
+      heldPiece.held = true;
+    }
   }
 
   function clientMouseMove(e) {
@@ -32,6 +34,7 @@ $(document).ready(function(){
       heldPiece.held = false;
       heldPiece = null;
       chessGame.resetPieces();
+      console.log(mouseToBoard(e).x + " " + mouseToBoard(e).y);
     }
   }
 
@@ -41,6 +44,14 @@ $(document).ready(function(){
       heldPiece = null;
       chessGame.resetPieces();
     }
+  }
+
+  function mouseToBoard(mouseLocation) {
+    var boardPosition = {
+      x: mouseLocation.x / chessGame.tileSize,
+      y: mouseLocation.y / chessGame.tileSize
+    };
+    return boardPosition;
   }
 
 });
