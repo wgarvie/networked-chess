@@ -96,7 +96,7 @@ Piece = function(newColor, xPos, yPos) {
 Pawn = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "pawn" + ".png";
-  this.initialMove = true;
+  //this.initialMove = true;
 }
 Pawn.prototype = Object.create(Piece.prototype);
 
