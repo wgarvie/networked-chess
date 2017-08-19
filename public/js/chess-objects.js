@@ -96,36 +96,137 @@ Piece = function(newColor, xPos, yPos) {
 Pawn = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "pawn" + ".png";
-  //this.initialMove = true;
+  this.initialMove = true;
+
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+    var newX = xLoc;
+    var newY = yLoc;
+    if(this.color == "white") {
+      newY = this.initialMove ? yLoc-2 : yLoc-1;
+    } else {
+      newY = this.initialMove ? yLoc+2 : yLoc+1;
+    }
+    var move = {
+      piece: this,
+      x: newX,
+      y: newY
+    };
+    return move;
+  }
 }
 Pawn.prototype = Object.create(Piece.prototype);
 
 Rook = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "rook" + ".png";
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+  }
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+    var newX = xLoc;
+    var newY = yLoc;
+    if(this.color == "white") {
+      newY = this.initialMove ? yLoc-2 : yLoc-1;
+    } else {
+      newY = this.initialMove ? yLoc+2 : yLoc+1;
+    }
+    var move = {
+      piece: this,
+      x: newX,
+      y: newY
+    };
+    return move;
+  }
 }
 Rook.prototype = Object.create(Piece.prototype);
 
 Bishop = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "bishop" + ".png";
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+  }
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+    var newX = xLoc;
+    var newY = yLoc;
+    if(this.color == "white") {
+      newY = this.initialMove ? yLoc-2 : yLoc-1;
+    } else {
+      newY = this.initialMove ? yLoc+2 : yLoc+1;
+    }
+    var move = {
+      piece: this,
+      x: newX,
+      y: newY
+    };
+    return move;
+  }
 }
 Bishop.prototype = Object.create(Piece.prototype);
 
 Knight = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "knight" + ".png";
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+  }
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+    var newX = xLoc;
+    var newY = yLoc;
+    if(this.color == "white") {
+      newY = this.initialMove ? yLoc-2 : yLoc-1;
+    } else {
+      newY = this.initialMove ? yLoc+2 : yLoc+1;
+    }
+    var move = {
+      piece: this,
+      x: newX,
+      y: newY
+    };
+    return move;
+  }
 }
 Knight.prototype = Object.create(Piece.prototype);
 
 Queen = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "queen" + ".png";
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+  }
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+    var newX = xLoc;
+    var newY = yLoc;
+    if(this.color == "white") {
+      newY = this.initialMove ? yLoc-2 : yLoc-1;
+    } else {
+      newY = this.initialMove ? yLoc+2 : yLoc+1;
+    }
+    var move = {
+      piece: this,
+      x: newX,
+      y: newY
+    };
+    return move;
+  }
 }
 Queen.prototype = Object.create(Piece.prototype);
 
 King = function(newColor, xPos, yPos) {
   Piece.call(this, newColor, xPos, yPos);
   this.img.src = "images/" + this.color + "-" + "king" + ".png";
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+  }
+  this.getValidMoves = function(chessBoard, xLoc, yLoc) {
+    var newX = xLoc;
+    var newY = yLoc;
+    if(this.color == "white") {
+      newY = this.initialMove ? yLoc-2 : yLoc-1;
+    } else {
+      newY = this.initialMove ? yLoc+2 : yLoc+1;
+    }
+    var move = {
+      piece: this,
+      x: newX,
+      y: newY
+    };
+    return move;
+  }
 }
 King.prototype = Object.create(Piece.prototype);
