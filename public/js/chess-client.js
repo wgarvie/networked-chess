@@ -6,7 +6,7 @@ $(document).ready(function(){
   let heldY = -1;
   let heldX = -1;
   let turn = "white";
-  let validMoves = chessGame.board.getValidMoves(turn);
+  let validMoves = chessGame.getValidMoves(turn);
   canvas.addEventListener('mousedown', clientMouseDown);
   canvas.addEventListener('mousemove', clientMouseMove);
   canvas.addEventListener('mouseup', clientMouseUp);
