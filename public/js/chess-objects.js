@@ -76,6 +76,18 @@ ChessGame = function() {
     }
   }
 
+  this.getValidMoves = function(turn) {
+    var validMoves = [];
+    for(var row = 0; row < this.board.length; row++) {
+      for(var col = 0; col < this.board.length; col++) {
+          if(this.board[row][col] != null && this.board[row][col].color == turn) {
+            validMoves = validMoves.concat(this.board[row][col].getValidMoves(this.board,col,row));
+          }
+      }
+    }
+    return validMoves;
+  }
+
 }
 
 Piece = function(newColor, xPos, yPos) {
@@ -99,19 +111,24 @@ Pawn = function(newColor, xPos, yPos) {
   this.initialMove = true;
 
   this.getValidMoves = function(chessBoard, xLoc, yLoc) {
-    var newX = xLoc;
-    var newY = yLoc;
+    let validMoves = [];
+    let newY = -1;
     if(this.color == "white") {
-      newY = this.initialMove ? yLoc-2 : yLoc-1;
+      if(this.initialMove) {
+        newY=yLoc-2;
+        validMoves = validMoves.concat(getMove(xLoc,newY,this));
+      }
+      newY=yLoc-1;
+      validMoves = validMoves.concat(getMove(xLoc,newY,this));
     } else {
-      newY = this.initialMove ? yLoc+2 : yLoc+1;
+      if(this.initialMove) {
+        newY=yLoc+2;
+        validMoves = validMoves.concat(getMove(xLoc,newY,this));
+      }
+      newY=yLoc+1;
+      validMoves = validMoves.concat(getMove(xLoc,newY,this));
     }
-    var move = {
-      piece: this,
-      x: newX,
-      y: newY
-    };
-    return move;
+    return validMoves;
   }
 }
 Pawn.prototype = Object.create(Piece.prototype);
@@ -230,3 +247,12 @@ King = function(newColor, xPos, yPos) {
   }
 }
 King.prototype = Object.create(Piece.prototype);
+
+function getMove(xLoc, yLoc, newPiece) {
+  const move = {
+    x: xLoc,
+    y: yLoc,
+    piece: newPiece
+  }
+  return move;
+}

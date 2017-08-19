@@ -5,8 +5,8 @@ $(document).ready(function(){
   let heldPiece = null;
   let heldY = -1;
   let heldX = -1;
-  let thisPlayer = new Player("white");
-  let validMoves = thisPlayer.getValidMoves(chessGame.board);
+  let turn = "white";
+  let validMoves = chessGame.board.getValidMoves(turn);
   canvas.addEventListener('mousedown', clientMouseDown);
   canvas.addEventListener('mousemove', clientMouseMove);
   canvas.addEventListener('mouseup', clientMouseUp);
@@ -21,9 +21,7 @@ $(document).ready(function(){
 
   function clientMouseDown(e) {
     const mouseY = mouseToBoard(e.y);
-    console.log(mouseY);
     const mouseX = mouseToBoard(e.x);
-    console.log(mouseX);
     heldPiece = chessGame.board[mouseY][mouseX];
     if(heldPiece != null) {
       heldY = mouseY;
