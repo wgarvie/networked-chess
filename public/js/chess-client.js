@@ -3,8 +3,10 @@ $(document).ready(function(){
   const context = canvas.getContext('2d');
   let chessGame = new ChessGame;
   let heldPiece = null;
-  var thisPlayer = new Player("white");
-  var validMoves = thisPlayer.getValidMoves(chessGame.board);
+  let heldY = -1;
+  let heldX = -1;
+  let thisPlayer = new Player("white");
+  let validMoves = thisPlayer.getValidMoves(chessGame.board);
   canvas.addEventListener('mousedown', clientMouseDown);
   canvas.addEventListener('mousemove', clientMouseMove);
   canvas.addEventListener('mouseup', clientMouseUp);
@@ -18,8 +20,14 @@ $(document).ready(function(){
   }
 
   function clientMouseDown(e) {
-    heldPiece = chessGame.board[Math.floor(e.y / chessGame.tileSize)][Math.floor(e.x / chessGame.tileSize)];
+    const mouseY = mouseToBoard(e.y);
+    console.log(mouseY);
+    const mouseX = mouseToBoard(e.x);
+    console.log(mouseX);
+    heldPiece = chessGame.board[mouseY][mouseX];
     if(heldPiece != null) {
+      heldY = mouseY;
+      heldX = mouseX;
       heldPiece.held = true;
     }
   }
@@ -32,17 +40,19 @@ $(document).ready(function(){
   }
 
   function clientMouseUp(e) {
-    var mouseX = mouseToBoard(e).x;
-    var mouseY = mouseToBoard(e).y;
+    var mouseX = mouseToBoard(e.x);
+    var mouseY = mouseToBoard(e.y);
     //console.log(mouseToBoard(e).x + " " + mouseToBoard(e).y);
     if(heldPiece!=null){
       if(checkMoveValidity(mouseX, mouseY, heldPiece)) {
-        console.log(1);
+        chessGame.board[heldY][heldX] = null;
         chessGame.board[mouseY][mouseX] = heldPiece;
         console.log(chessGame.board);
       }
       heldPiece.held = false;
       heldPiece = null;
+      heldY = -1;
+      heldX = -1;
       chessGame.resetPieces();
     }
   }
@@ -51,16 +61,14 @@ $(document).ready(function(){
     if(heldPiece!=null){
       heldPiece.held = false;
       heldPiece = null;
+      heldY = -1;
+      heldX = -1;
       chessGame.resetPieces();
     }
   }
 
   function mouseToBoard(mouseLocation) {
-    var boardPosition = {
-      x: Math.floor(mouseLocation.x / chessGame.tileSize),
-      y: Math.floor(mouseLocation.y / chessGame.tileSize)
-    };
-    return boardPosition;
+    return Math.floor(mouseLocation / chessGame.tileSize);
   }
 
   function checkMoveValidity(x, y, piece) {
