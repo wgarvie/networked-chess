@@ -5,7 +5,6 @@ $(document).ready(function(){
   let heldPiece = null;
   var thisPlayer = new Player("white");
   var validMoves = thisPlayer.getValidMoves(chessGame.board);
-  console.log(validMoves);
   canvas.addEventListener('mousedown', clientMouseDown);
   canvas.addEventListener('mousemove', clientMouseMove);
   canvas.addEventListener('mouseup', clientMouseUp);
@@ -33,16 +32,18 @@ $(document).ready(function(){
   }
 
   function clientMouseUp(e) {
+    var mouseX = mouseToBoard(e).x;
+    var mouseY = mouseToBoard(e).y;
+    //console.log(mouseToBoard(e).x + " " + mouseToBoard(e).y);
     if(heldPiece!=null){
+      if(checkMoveValidity(mouseX, mouseY, heldPiece)) {
+        console.log(1);
+        chessGame.board[mouseY][mouseX] = heldPiece;
+        console.log(chessGame.board);
+      }
       heldPiece.held = false;
       heldPiece = null;
       chessGame.resetPieces();
-      console.log(mouseToBoard(e).x + " " + mouseToBoard(e).y);
-      if(checkMoveValidity(mouseToBoard(e).x, mouseToBoard(e).y, heldPiece)) {
-        console.log("that will work for me!");
-      } else {
-        console.log("No WAY!");
-      }
     }
   }
 
@@ -63,9 +64,7 @@ $(document).ready(function(){
   }
 
   function checkMoveValidity(x, y, piece) {
-    console.log(validMoves[0]);
     for(var i = 0; i < validMoves.length; i++) {
-      console.log(validMoves[i]);
       if(x == validMoves[i].x && y ==validMoves[i].y && piece==validMoves[i].piece) {
         return true;
       }
