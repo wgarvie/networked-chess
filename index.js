@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
-//const io = require('socket.io')(server)
+const io = require('socket.io')(server)
 const port = process.env.PORT || 3000;
 
 const chessobjects = require('./chess-objects')
@@ -21,3 +21,7 @@ for(let i = 0; i < board.length; i++) {
   }
   console.log()
 }
+
+io.on('connection', function(client) {
+  console.log("User connected")
+})

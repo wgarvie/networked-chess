@@ -1,11 +1,12 @@
 $(document).ready(function(){
-  const canvas = $('.game-canvas').get(0);
-  const context = canvas.getContext('2d');
-  let chessGame = new ChessGame;
-  let heldPiece = null;
-  let heldY = -1;
-  let heldX = -1;
-  let turn = "white";
+  const socket = io()
+  const canvas = $('.game-canvas').get(0)
+  const context = canvas.getContext('2d')
+  let chessGame = new ChessGame
+  let heldPiece = null
+  let heldY = -1
+  let heldX = -1
+  let turn = "white"
   let validMoves = chessGame.getValidMoves(turn);
   canvas.addEventListener('mousedown', clientMouseDown);
   canvas.addEventListener('mousemove', clientMouseMove);
