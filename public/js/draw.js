@@ -1,8 +1,38 @@
-let Draw = (function() {
+const Draw = (function() {
   const darkTileColor = "#B29977"
   const lightTileColor = "#FFE5C3"
   const blackPawnImage = new Image()
-  blackPawnImage.src = "images/black-pawn.png"
+  let imgDict = {}
+  imgDict.blackpawn = new Image()
+  imgDict.blackpawn.src = "images/black-pawn.png"
+  imgDict.whitepawn = new Image()
+  imgDict.whitepawn.src = "images/white-pawn.png"
+  imgDict.blackrook = new Image()
+  imgDict.blackrook.src = "images/black-rook.png"
+  imgDict.whiterook = new Image()
+  imgDict.whiterook.src = "images/white-rook.png"
+  imgDict.blackknight = new Image()
+  imgDict.blackknight.src = "images/black-knight.png"
+  imgDict.whiteknight = new Image()
+  imgDict.whiteknight.src = "images/white-knight.png"
+  imgDict.blackbishop = new Image()
+  imgDict.blackbishop.src = "images/black-bishop.png"
+  imgDict.whitebishop = new Image()
+  imgDict.whitebishop.src = "images/white-bishop.png"
+  imgDict.blackqueen = new Image()
+  imgDict.blackqueen.src = "images/black-queen.png"
+  imgDict.whitequeen = new Image()
+  imgDict.whitequeen.src = "images/white-queen.png"
+  imgDict.blackking = new Image()
+  imgDict.blackking.src = "images/black-king.png"
+  imgDict.whiteking = new Image()
+  imgDict.whiteking.src = "images/white-king.png"
+
+
+  //blackPawnImage.src = "images/black-pawn.png"
+  //const blackPawnImage = new Image()
+  //blackPawnImage.src = "images/black-pawn.png"
+
   let tileWidth, pieceWidth
 
   //private method
@@ -10,7 +40,7 @@ let Draw = (function() {
     //if(piece.type == "pawn") {
   //    if(piece.color == "black")
   //  }
-    context.drawImage(blackPawnImage, piece.xPos, piece.yPos, pieceWidth, pieceWidth)
+    context.drawImage(imgDict[piece.color+piece.type], piece.xPos, piece.yPos, pieceWidth, pieceWidth)
   }
 
   //public method

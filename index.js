@@ -1,4 +1,3 @@
-//initializing the app
 const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
@@ -12,7 +11,6 @@ server.listen(port,function() {
 
 app.use(express.static(__dirname + '/public'))
 
-//server side game logic
 const chessobjects = require('./chess-objects')
 const canvasWidth = 600
 const tileWidth = canvasWidth / 8
