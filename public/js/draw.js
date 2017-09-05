@@ -1,6 +1,10 @@
 const darkTileColor = "#B29977"
 const lightTileColor = "#FFE5C3"
 const tileSize = 75
+const pieceWidth = 70
+const blackPawnImage = new Image()
+blackPawnImage.src = "images/black-pawn.png"
+
 
 function drawGame(context, board) {
   for (y = 0; y < 8; y+=1) {
@@ -13,8 +17,7 @@ function drawGame(context, board) {
     for(x = 0; x < 8; x+=1) {
       //if(this.board[y][x] != null && !this.board[y][x].held) {
       if(board[y][x] != null) {
-        console.log(board[y][x])
-        drawPiece(context, board[y][x]);
+        drawPiece(context, board[y][x])
       }
     }
   }
@@ -28,8 +31,8 @@ function drawGame(context, board) {
 }
 
 function drawPiece(context, piece) {
-  img = new Image();
-  console.log("Draw a damn piece")
-  img.src = "images/" + "black" + "-" + "pawn" + ".png"
-  context.drawImage(img, piece.xPos, piece.yPos, piece.height, piece.width)
+  //if(piece.type == "pawn") {
+//    if(piece.color == "black")
+//  }
+  context.drawImage(blackPawnImage, piece.xPos, piece.yPos, pieceWidth, pieceWidth)
 }

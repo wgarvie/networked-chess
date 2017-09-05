@@ -2,38 +2,37 @@ $(document).ready(function(){
   const socket = io()
   const canvas = $('.game-canvas').get(0)
   const context = canvas.getContext('2d')
-  var $userNameInput = $('.login-screen__input');
-  var $loginScreen = $('.login-screen');
+  var $userNameInput = $('.login-screen__input')
+  var $loginScreen = $('.login-screen')
 
   function cleanInput (input) {
-    return $('<div/>').text(input.trim()).text();
+    return $('<div/>').text(input.trim()).text()
   }
 
   $userNameInput.keydown(function (event) {
     if(event.which == 13) {
-      setUserName();
+      setUserName()
     }
-  });
+  })
 
   function setUserName() {
-    username = cleanInput($userNameInput.val());
+    username = cleanInput($userNameInput.val())
     if(username) {
-      $loginScreen.fadeOut();
-      socket.emit('add user', username);
+      $loginScreen.fadeOut()
+      socket.emit('add user', username)
     }
   }
 
   socket.on('startClient', function(board) {
-    //boardHeight = serverGame.boardHeight;
-    //color = newColor;
-    //drawBoard(context, board, boardHeight);
-    //drawPieces(context, board);
-    console.log("client starting")
+    //boardHeight = serverGame.boardHeight
+    //color = newColor
+    //drawBoard(context, board, boardHeight)
+    //drawPieces(context, board)
     drawGame(context, board)
     //setInterval(function() {
-    //  mainLoop();
-    //}, INTERVAL);
-  });
+    //  mainLoop()
+    //}, INTERVAL)
+  })
 
   /*let chessGame = new ChessGame
   let heldPiece = null
@@ -74,7 +73,7 @@ $(document).ready(function(){
   function clientMouseUp(e) {
     var mouseX = mouseToBoard(e.x)
     var mouseY = mouseToBoard(e.y)
-    //console.log(mouseToBoard(e).x + " " + mouseToBoard(e).y);
+    //console.log(mouseToBoard(e).x + " " + mouseToBoard(e).y)
     if(heldPiece!=null){
       if(checkMoveValidity(mouseX, mouseY, heldPiece)) {
         chessGame.board[heldY][heldX] = null
@@ -104,7 +103,7 @@ $(document).ready(function(){
   }
 
   function checkMoveValidity(x, y, piece) {
-    for(var i = 0; i < validMoves.length; i++) {
+    for(var i = 0; i < validMoves.length ;i++) {
       if(x == validMoves[i].x && y ==validMoves[i].y && piece==validMoves[i].piece) {
         return true
       }
@@ -112,4 +111,4 @@ $(document).ready(function(){
     return false
   }*/
 
-});
+})

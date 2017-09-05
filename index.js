@@ -4,7 +4,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
 server.listen(port,function() {
   console.log('Server listening at port ' + port)
@@ -31,7 +31,7 @@ io.on('connection', function(client) {
     console.log(client.username + " has logged in.")
     console.log(numUsers + " users are connected.")
     if(!whiteLoggedIn && !blackLoggedIn) {
-      const rand = Math.floor(Math.random() * (2));
+      const rand = Math.floor(Math.random() * (2))
       if(rand === 0){
         client.color = "white"
         whiteLoggedIn = true
@@ -60,16 +60,16 @@ io.on('connection', function(client) {
 
   client.on('disconnect', function() {
     if(client.username) {
-      numUsers--;
+      numUsers--
       console.log(client.username + " has logged out.")
-      console.log(numUsers + " users are connected.");
+      console.log(numUsers + " users are connected.")
       if(client.color === "white") {
-        whiteLoggedIn = false;
+        whiteLoggedIn = false
       }
       else if(client.color === "black") {
-        blackLoggedIn = false;
+        blackLoggedIn = false
       }
     }
-  });
+  })
 
 })
