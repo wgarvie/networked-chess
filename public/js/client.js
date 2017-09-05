@@ -1,12 +1,22 @@
 $(document).ready(function(){
+
   const socket = io()
   const canvas = $('.game-canvas').get(0)
   const context = canvas.getContext('2d')
-  var $userNameInput = $('.login-screen__input')
-  var $loginScreen = $('.login-screen')
+  const $userNameInput = $('.login-screen__input')
+  const $loginScreen = $('.login-screen')
+  let board, canvasWidth
 
   function cleanInput (input) {
     return $('<div/>').text(input.trim()).text()
+  }
+
+  function setUserName() {
+    const username = cleanInput($userNameInput.val())
+    if(username) {
+      $loginScreen.fadeOut()
+      socket.emit('add user', username)
+    }
   }
 
   $userNameInput.keydown(function (event) {
@@ -15,20 +25,15 @@ $(document).ready(function(){
     }
   })
 
-  function setUserName() {
-    username = cleanInput($userNameInput.val())
-    if(username) {
-      $loginScreen.fadeOut()
-      socket.emit('add user', username)
-    }
-  }
-
-  socket.on('startClient', function(board) {
+  socket.on('startClient', function(newBoard, newCanvasWidth) {
+    canvasWidth = newCanvasWidth
+    board = newBoard
+    Draw.setGameSize(canvasWidth)
     //boardHeight = serverGame.boardHeight
     //color = newColor
     //drawBoard(context, board, boardHeight)
     //drawPieces(context, board)
-    drawGame(context, board)
+    Draw.drawGame(context,board)
     //setInterval(function() {
     //  mainLoop()
     //}, INTERVAL)

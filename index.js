@@ -14,10 +14,8 @@ app.use(express.static(__dirname + '/public'))
 
 //server side game logic
 const chessobjects = require('./chess-objects')
-
 const canvasWidth = 600
-const numTiles = 8
-const tileWidth = canvasWidth / numTiles
+const tileWidth = canvasWidth / 8
 let numUsers = 0
 let whiteLoggedIn = false
 let blackLoggedIn = false
@@ -55,7 +53,7 @@ io.on('connection', function(client) {
       }
       console.log(client.username + " has joined the game second and will play as " + client.color + ".")
     }
-    client.emit('startClient', board)
+    client.emit('startClient', board, canvasWidth)
   })
 
   client.on('disconnect', function() {
