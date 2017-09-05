@@ -52,4 +52,18 @@ io.on('connection', function(client) {
     //client.emit('newGame', game, client.color)
   })
 
+  client.on('disconnect', function() {
+    if(client.username) {
+      numUsers--;
+      console.log(client.username + " has logged out.")
+      console.log(numUsers + " users are connected.");
+      if(client.color === "white") {
+        whiteLoggedIn = false;
+      }
+      else if(client.color === "black") {
+        blackLoggedIn = false;
+      }
+    }
+  });
+
 })
