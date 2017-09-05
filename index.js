@@ -5,7 +5,6 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
 const port = process.env.PORT || 3000;
-const chessobjects = require('./chess-objects')
 
 server.listen(port,function() {
   console.log('Server listening at port ' + port)
@@ -14,9 +13,16 @@ server.listen(port,function() {
 app.use(express.static(__dirname + '/public'))
 
 //server side game logic
+const chessobjects = require('./chess-objects')
+
+const canvasWidth = 600
+const numTiles = 8
+const tileWidth = canvasWidth / numTiles
 let numUsers = 0
 let whiteLoggedIn = false
 let blackLoggedIn = false
+let board = chessobjects.newBoard(tileWidth)
+
 io.on('connection', function(client) {
 
   client.on('add user', function(username) {
@@ -49,7 +55,7 @@ io.on('connection', function(client) {
       }
       console.log(client.username + " has joined the game second and will play as " + client.color + ".")
     }
-    //client.emit('newGame', game, client.color)
+    client.emit('startClient', board)
   })
 
   client.on('disconnect', function() {

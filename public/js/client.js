@@ -22,7 +22,19 @@ $(document).ready(function(){
       socket.emit('add user', username);
     }
   }
-  
+
+  socket.on('startClient', function(board) {
+    //boardHeight = serverGame.boardHeight;
+    //color = newColor;
+    //drawBoard(context, board, boardHeight);
+    //drawPieces(context, board);
+    console.log("client starting")
+    drawGame(context, board)
+    //setInterval(function() {
+    //  mainLoop();
+    //}, INTERVAL);
+  });
+
   /*let chessGame = new ChessGame
   let heldPiece = null
   let heldY = -1
