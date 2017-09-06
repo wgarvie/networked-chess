@@ -2,6 +2,9 @@ const Draw = (function() {
   const darkTileColor = "#B29977"
   const lightTileColor = "#FFE5C3"
   const blackPawnImage = new Image()
+  let tileWidth, pieceWidth
+
+  //loading piece images
   let imgDict = {}
   imgDict.blackpawn = new Image()
   imgDict.blackpawn.src = "images/black-pawn.png"
@@ -28,22 +31,10 @@ const Draw = (function() {
   imgDict.whiteking = new Image()
   imgDict.whiteking.src = "images/white-king.png"
 
-
-  //blackPawnImage.src = "images/black-pawn.png"
-  //const blackPawnImage = new Image()
-  //blackPawnImage.src = "images/black-pawn.png"
-
-  let tileWidth, pieceWidth
-
-  //private method
   function drawPiece(context, piece, pieceWidth) {
-    //if(piece.type == "pawn") {
-  //    if(piece.color == "black")
-  //  }
     context.drawImage(imgDict[piece.color+piece.type], piece.xPos, piece.yPos, pieceWidth, pieceWidth)
   }
 
-  //public method
   return {
 
     setGameSize: function(newCanvasWidth) {
