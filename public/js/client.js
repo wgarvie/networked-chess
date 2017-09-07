@@ -50,14 +50,6 @@ $(document).ready(function(){
       y: e.y
     }
     socket.emit('mouseDown',click)
-    //const mouseY = mouseToBoard(e.y)
-    //const mouseX = mouseToBoard(e.x)
-    //heldPiece = chessGame.board[mouseY][mouseX]
-    //if(heldPiece != null) {
-    //  heldY = mouseY
-    //  heldX = mouseX
-    //  heldPiece.held = true
-    //}
   }
 
   function clickToBoardPosition(clickLocation) {
@@ -69,8 +61,6 @@ $(document).ready(function(){
   let heldY = -1
   let heldX = -1
   let turn = "white"
-  let validMoves = chessGame.getValidMoves(turn)
-  canvas.addEventListener('mousedown', clientMouseDown)
   canvas.addEventListener('mousemove', clientMouseMove)
   canvas.addEventListener('mouseup', clientMouseUp)
   canvas.addEventListener('mouseout', clientMouseOut)
