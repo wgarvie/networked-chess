@@ -7,7 +7,7 @@ $(document).ready(function(){
   const $userNameInput = $('.login-screen__input')
   const $loginScreen = $('.login-screen')
   const INTERVAL = 50
-  let board, canvasWidth, tileWidth
+  let board, canvasWidth, tileWidth, pieceWidth
 
   function cleanInput (input) {
     return $('<div/>').text(input.trim()).text()
@@ -30,8 +30,8 @@ $(document).ready(function(){
   socket.on('startClient', function(newBoard, newCanvasWidth, newTileWidth) {
     canvasWidth = newCanvasWidth
     tileWidth = newTileWidth
+    pieceWidth = tileWidth - 5
     board = newBoard
-    Draw.setGameSize(canvasWidth, tileWidth)
     //color = newColor
     setInterval(function() {
       mainLoop()
@@ -39,7 +39,7 @@ $(document).ready(function(){
   })
 
   function mainLoop() {
-    Draw.drawGame(context,board)
+    Draw.drawGame(context,board, tileWidth, pieceWidth)
   }
 
   function mouseDown(e) {

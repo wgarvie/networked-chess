@@ -1,9 +1,7 @@
 const Draw = (function() {
   const darkTileColor = "#B29977"
   const lightTileColor = "#FFE5C3"
-  const blackPawnImage = new Image()
-  let tileWidth, pieceWidth
-
+  
   //loading piece images
   let imgDict = {}
   imgDict.blackpawn = new Image()
@@ -37,12 +35,7 @@ const Draw = (function() {
 
   return {
 
-    setGameSize: function(newCanvasWidth, newTileWidth) {
-      tileWidth = newTileWidth
-      pieceWidth = tileWidth - 5
-    },
-
-    drawGame: function(context, board) {
+    drawGame: function(context, board, tileWidth, pieceWidth) {
       for (y = 0; y < 8; y+=1) {
         for(x = 0; x < 8; x+=1) {
           context.fillStyle= ((x+y) % 2 == 0) ? lightTileColor: darkTileColor
