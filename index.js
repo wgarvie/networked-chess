@@ -51,7 +51,7 @@ io.on('connection', function(client) {
       }
       console.log(client.username + " has joined the game second and will play as " + client.color + ".")
     }
-    client.emit('startClient', board, canvasWidth)
+    client.emit('startClient', board, canvasWidth, tileWidth)
   })
 
   client.on('disconnect', function() {
@@ -66,6 +66,14 @@ io.on('connection', function(client) {
         blackLoggedIn = false
       }
     }
+  })
+
+  client.on('mouseDown', function(e) {
+    console.log(e.x + " " + e.y)
+    //var grab = checkers.grabPiece(game.board, game.turn, client.color, game.heldPiece, game.heldX, game.heldY, e)
+    //game.heldPiece = grab.piece
+    //game.heldX = grab.x
+    //game.heldY = grab.y
   })
 
 })

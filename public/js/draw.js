@@ -37,8 +37,8 @@ const Draw = (function() {
 
   return {
 
-    setGameSize: function(newCanvasWidth) {
-      tileWidth = newCanvasWidth / 8
+    setGameSize: function(newCanvasWidth, newTileWidth) {
+      tileWidth = newTileWidth
       pieceWidth = tileWidth - 5
     },
 

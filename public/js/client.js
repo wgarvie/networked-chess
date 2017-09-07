@@ -2,10 +2,12 @@ $(document).ready(function(){
 
   const socket = io()
   const canvas = $('.game-canvas').get(0)
+  canvas.addEventListener('mousedown', mouseDown)
   const context = canvas.getContext('2d')
   const $userNameInput = $('.login-screen__input')
   const $loginScreen = $('.login-screen')
-  let board, canvasWidth
+  const INTERVAL = 50
+  let board, canvasWidth, tileWidth
 
   function cleanInput (input) {
     return $('<div/>').text(input.trim()).text()
@@ -25,19 +27,42 @@ $(document).ready(function(){
     }
   })
 
-  socket.on('startClient', function(newBoard, newCanvasWidth) {
+  socket.on('startClient', function(newBoard, newCanvasWidth, newTileWidth) {
     canvasWidth = newCanvasWidth
+    tileWidth = newTileWidth
     board = newBoard
-    Draw.setGameSize(canvasWidth)
-    //boardHeight = serverGame.boardHeight
+    Draw.setGameSize(canvasWidth, tileWidth)
     //color = newColor
-    //drawBoard(context, board, boardHeight)
-    //drawPieces(context, board)
-    Draw.drawGame(context,board)
-    //setInterval(function() {
-    //  mainLoop()
-    //}, INTERVAL)
+    setInterval(function() {
+      mainLoop()
+    }, INTERVAL)
   })
+
+  function mainLoop() {
+    Draw.drawGame(context,board)
+  }
+
+  function mouseDown(e) {
+    const row = clickToBoardPosition(e.y)
+    const col = clickToBoardPosition(e.x)
+    const click = {
+      x: e.x,
+      y: e.y
+    }
+    socket.emit('mouseDown',click)
+    //const mouseY = mouseToBoard(e.y)
+    //const mouseX = mouseToBoard(e.x)
+    //heldPiece = chessGame.board[mouseY][mouseX]
+    //if(heldPiece != null) {
+    //  heldY = mouseY
+    //  heldX = mouseX
+    //  heldPiece.held = true
+    //}
+  }
+
+  function clickToBoardPosition(clickLocation) {
+    return Math.floor(clickLocation / tileWidth)
+  }
 
   /*let chessGame = new ChessGame
   let heldPiece = null
