@@ -43,8 +43,8 @@ $(document).ready(function(){
   }
 
   function mouseDown(e) {
-    const row = clickToBoardPosition(e.y)
-    const col = clickToBoardPosition(e.x)
+    //const row = clickToBoardPosition(e.y)
+    //const col = clickToBoardPosition(e.x)
     const click = {
       x: e.x,
       y: e.y
@@ -52,9 +52,9 @@ $(document).ready(function(){
     socket.emit('mouseDown',click)
   }
 
-  function clickToBoardPosition(clickLocation) {
-    return Math.floor(clickLocation / tileWidth)
-  }
+  //function clickToBoardPosition(clickLocation) {
+  //  return Math.floor(clickLocation / tileWidth)
+  //}
 
   /*let chessGame = new ChessGame
   let heldPiece = null

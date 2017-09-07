@@ -11,14 +11,14 @@ server.listen(port,function() {
 
 app.use(express.static(__dirname + '/public'))
 
-const chessobjects = require('./chess-objects')
+//const chessobjects = require('./chess-objects')
 const chess = require('./chess')
 const canvasWidth = 600
 const tileWidth = canvasWidth / 8
 let numUsers = 0
 let whiteLoggedIn = false
 let blackLoggedIn = false
-let board = chessobjects.newBoard(tileWidth)
+let board = chess.newBoard(tileWidth)
 let turn = "white"
 let heldPiece = null, heldY = -1, heldX = -1
 
@@ -72,7 +72,7 @@ io.on('connection', function(client) {
   })
 
   client.on('mouseDown', function(e) {
-    let grab = chess.selectPiece(client.color, turn, board, heldPiece, heldX, heldY, e)
+    let grab = chess.selectPiece(client.color, turn, board, tileWidth, heldPiece, heldX, heldY, e)
     //game.heldPiece = grab.piece
     //game.heldX = grab.x
     //game.heldY = grab.y
