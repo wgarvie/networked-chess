@@ -80,8 +80,8 @@ io.on('connection', function(client) {
 
   client.on('mouseMove', function(e) {
     if(heldPiece!=null){
-      heldPiece.xPos = e.x
-      heldPiece.yPos = e.y
+      heldPiece.xPos = e.x-32
+      heldPiece.yPos = e.y-32
       io.emit('sync', board)
     }
   })
