@@ -72,10 +72,18 @@ io.on('connection', function(client) {
   })
 
   client.on('mouseDown', function(e) {
-    let grab = chess.selectPiece(client.color, turn, board, tileWidth, heldPiece, heldX, heldY, e)
+    heldPiece = chess.selectPiece(client.color, turn, board, tileWidth, heldPiece, heldX, heldY, e)
     //game.heldPiece = grab.piece
     //game.heldX = grab.x
     //game.heldY = grab.y
+  })
+
+  client.on('mouseMove', function(e) {
+    if(heldPiece!=null){
+      heldPiece.xPos = e.x
+      heldPiece.yPos = e.y
+      io.emit('sync', board)
+    }
   })
 
 })

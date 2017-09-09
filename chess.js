@@ -16,7 +16,10 @@ module.exports = {
 
   selectPiece: function(color, turn, board, tileWidth, heldPiece, heldX, heldY, click) {
     const boardPosition = clickToBoardPosition(click, tileWidth)
-    console.log(board[boardPosition.row][boardPosition.col])
+    //console.log(board[boardPosition.row][boardPosition.col])
+    if(board[boardPosition.row][boardPosition.col] != null) {
+      return board[boardPosition.row][boardPosition.col]
+    }
   },
 
   newBoard: function(tileWidth) {

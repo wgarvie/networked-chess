@@ -3,6 +3,7 @@ $(document).ready(function(){
   const socket = io()
   const canvas = $('.game-canvas').get(0)
   canvas.addEventListener('mousedown', mouseDown)
+  canvas.addEventListener('mousemove', mouseMove)
   const context = canvas.getContext('2d')
   const $userNameInput = $('.login-screen__input')
   const $loginScreen = $('.login-screen')
@@ -43,14 +44,25 @@ $(document).ready(function(){
   }
 
   function mouseDown(e) {
-    //const row = clickToBoardPosition(e.y)
-    //const col = clickToBoardPosition(e.x)
     const click = {
       x: e.x,
       y: e.y
     }
     socket.emit('mouseDown',click)
   }
+
+  function mouseMove(e) {
+    const click = {
+      x: e.x,
+      y: e.y
+    }
+    socket.emit('mouseMove',click)
+  }
+
+  socket.on('sync', function(serverBoard) {
+    board = serverBoard;
+  })
+
 
   //function clickToBoardPosition(clickLocation) {
   //  return Math.floor(clickLocation / tileWidth)
