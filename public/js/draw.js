@@ -1,7 +1,7 @@
 const Draw = (function() {
   const darkTileColor = "#B29977"
   const lightTileColor = "#FFE5C3"
-  
+
   //loading piece images
   let imgDict = {}
   imgDict.blackpawn = new Image()
@@ -44,19 +44,18 @@ const Draw = (function() {
       }
       for (y = 0; y < 8; y+=1) {
         for(x = 0; x < 8; x+=1) {
-          //if(this.board[y][x] != null && !this.board[y][x].held) {
-          if(board[y][x] != null) {
+          if(board[y][x] != null && !board[y][x].held) {
             drawPiece(context, board[y][x], pieceWidth)
           }
         }
       }
-      /*for (y = 0; y < 8; y+=1) {
+      for (y = 0; y < 8; y+=1) {
         for(x = 0; x < 8; x+=1) {
-          if(this.board[y][x] != null && this.board[y][x].held) {
-            this.board[y][x].drawPiece(context);
+          if(board[y][x] != null && board[y][x].held) {
+            drawPiece(context, board[y][x], pieceWidth)
           }
         }
-      }*/
+      }
     }
   }
 

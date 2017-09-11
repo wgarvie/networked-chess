@@ -3,23 +3,34 @@ function Piece(type,color,xPos,yPos) {
   this.color = color
   this.xPos = xPos
   this.yPos = yPos
+  this.held = false
 }
 
-function clickToBoardPosition(click, tileWidth) {
+function mouseToBoardPosition(mousePosition, tileWidth) {
   return boardPosition = {
-    row: Math.floor(click.y / tileWidth),
-    col: Math.floor(click.x / tileWidth)
+    row: Math.floor(mousePosition.y / tileWidth),
+    col: Math.floor(mousePosition.x / tileWidth)
   }
 }
 
 module.exports = {
 
-  selectPiece: function(color, turn, board, tileWidth, heldPiece, heldX, heldY, click) {
-    const boardPosition = clickToBoardPosition(click, tileWidth)
-    //console.log(board[boardPosition.row][boardPosition.col])
-    if(board[boardPosition.row][boardPosition.col] != null) {
-      return board[boardPosition.row][boardPosition.col]
+  selectPiece: function(color, turn, board, tileWidth, heldPiece, mousePosition) {
+    let grab = {
+      row: -1,
+      col: -1,
+      piece: null
     }
+    //check player turn
+    if(heldPiece == null) {
+      const boardPosition = mouseToBoardPosition(mousePosition, tileWidth)
+      if(board[boardPosition.row][boardPosition.col] != null) {
+        grab.piece = board[boardPosition.row][boardPosition.col]
+        grab.row = boardPosition.row
+        grab.col = boardPosition.col
+      }
+    }
+    return grab
   },
 
   newBoard: function(tileWidth) {

@@ -20,7 +20,7 @@ let whiteLoggedIn = false
 let blackLoggedIn = false
 let board = chess.newBoard(tileWidth)
 let turn = "white"
-let heldPiece = null, heldY = -1, heldX = -1
+let heldPiece = null, heldCol = -1, heldRow = -1
 
 io.on('connection', function(client) {
 
@@ -72,10 +72,11 @@ io.on('connection', function(client) {
   })
 
   client.on('mouseDown', function(e) {
-    heldPiece = chess.selectPiece(client.color, turn, board, tileWidth, heldPiece, heldX, heldY, e)
-    //game.heldPiece = grab.piece
-    //game.heldX = grab.x
-    //game.heldY = grab.y
+    let grab = chess.selectPiece(client.color, turn, board, tileWidth, heldPiece, e)
+    heldPiece = grab.piece
+    heldCol = grab.col
+    heldRow = grab.row
+    heldPiece.held = true
   })
 
   client.on('mouseMove', function(e) {
