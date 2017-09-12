@@ -4,6 +4,7 @@ $(document).ready(function(){
   const canvas = $('.game-canvas').get(0)
   canvas.addEventListener('mousedown', mouseDown)
   canvas.addEventListener('mousemove', mouseMove)
+  //canvas.addEventListener('mouseup', mouseUp)
   const context = canvas.getContext('2d')
   const $userNameInput = $('.login-screen__input')
   const $loginScreen = $('.login-screen')

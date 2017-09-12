@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
-
 const port = process.env.PORT || 3000
 
 server.listen(port,function() {
@@ -11,16 +10,11 @@ server.listen(port,function() {
 
 app.use(express.static(__dirname + '/public'))
 
-//const chessobjects = require('./chess-objects')
 const chess = require('./chess')
-const canvasWidth = 600
-const tileWidth = canvasWidth / 8
+
 let numUsers = 0
 let whiteLoggedIn = false
 let blackLoggedIn = false
-let board = chess.newBoard(tileWidth)
-let turn = "white"
-let heldPiece = null, heldCol = -1, heldRow = -1
 
 io.on('connection', function(client) {
 
@@ -54,7 +48,7 @@ io.on('connection', function(client) {
       }
       console.log(client.username + " has joined the game second and will play as " + client.color + ".")
     }
-    client.emit('startClient', board, canvasWidth, tileWidth)
+    client.emit('startClient', chess.getBoard(), chess.getCanvasWidth(), chess.getTileWidth())
   })
 
   client.on('disconnect', function() {
@@ -71,19 +65,13 @@ io.on('connection', function(client) {
     }
   })
 
-  client.on('mouseDown', function(e) {
-    let grab = chess.selectPiece(client.color, turn, board, tileWidth, heldPiece, e)
-    heldPiece = grab.piece
-    heldCol = grab.col
-    heldRow = grab.row
-    heldPiece.held = true
+  client.on('mouseDown', function(mousePosition) {
+    chess.selectPiece(client.color, mousePosition)
   })
 
-  client.on('mouseMove', function(e) {
-    if(heldPiece!=null){
-      heldPiece.xPos = e.x-32
-      heldPiece.yPos = e.y-32
-      io.emit('sync', board)
+  client.on('mouseMove', function(mousePosition) {
+    if (chess.movePiece(client.color, mousePosition)) {
+      io.emit('sync', chess.getBoard())
     }
   })
 
