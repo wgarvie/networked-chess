@@ -11,7 +11,6 @@ server.listen(port,function() {
 app.use(express.static(__dirname + '/public'))
 
 const chess = require('./chess')
-
 let numUsers = 0
 let whiteLoggedIn = false
 let blackLoggedIn = false
