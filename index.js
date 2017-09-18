@@ -74,4 +74,9 @@ io.on('connection', function(client) {
     }
   })
 
+  client.on('mouseUp', function(mousePosition) {
+    chess.placePiece(client.color, mousePosition)
+    io.emit('sync', chess.getBoard())
+  })
+
 })
