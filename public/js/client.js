@@ -5,6 +5,7 @@ $(document).ready(function(){
   canvas.addEventListener('mousedown', mouseDown)
   canvas.addEventListener('mousemove', mouseMove)
   canvas.addEventListener('mouseup', mouseUp)
+  canvas.addEventListener('mouseout', mouseUp)
   const context = canvas.getContext('2d')
   const $userNameInput = $('.login-screen__input')
   const $loginScreen = $('.login-screen')
@@ -66,6 +67,14 @@ $(document).ready(function(){
       y: e.y
     }
     socket.emit('mouseUp',click)
+  }
+
+  function mouseOut(e) {
+    const click = {
+      x: e.x,
+      y: e.y
+    }
+    socket.emit('mouseOut',click)
   }
 
   socket.on('sync', function(serverBoard) {

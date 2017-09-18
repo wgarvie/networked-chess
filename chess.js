@@ -96,13 +96,19 @@ module.exports = {
     return tileWidth
   },
 
-  placePiece: function(clientColor, mousePosition) {
-    if(heldPiece!=null){
+  returnHeldPiece: function(clientColor) {
+    if(heldPiece!=null) {
       heldPiece.xPos = pieceXPos(heldCol)
       heldPiece.yPos = pieceYPos(heldRow)
       heldCol = -1
       heldRow = -1
       heldPiece = null
+    }
+  },
+
+  placePiece: function(clientColor, mousePosition) {
+    if(heldPiece!=null){
+      this.returnHeldPiece(clientColor)
     }
   }
 

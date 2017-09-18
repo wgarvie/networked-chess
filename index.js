@@ -79,4 +79,9 @@ io.on('connection', function(client) {
     io.emit('sync', chess.getBoard())
   })
 
+  client.on('mouseOut', function(mousePosition) {
+    chess.returnHeldPiece(clientColor)
+    io.emit('sync', chess.getBoard)
+  })
+
 })
