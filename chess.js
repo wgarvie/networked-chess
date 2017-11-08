@@ -28,8 +28,6 @@ function newBoard() {
   }
   for(let x = 0; x < 8; x++) {
     const xPos = pieceXPos(x)
-    //const xPos = (tileWidth * x) + 2
-    //let yPos = y => (tileWidth * y) + 2
     board[1][x] = new Piece("pawn","black", xPos, pieceYPos(1))
     board[6][x] = new Piece("pawn", "white", xPos, pieceYPos(6))
     switch(x) {
@@ -59,6 +57,23 @@ function newBoard() {
     }
   }
   return board
+}
+
+function getValidMoves(piece) {
+  let moves = []
+  if(piece.type === 'pawn') {
+    boardPosition = {
+      row: heldRow,
+      col: heldCol
+    }
+    if(piece.color === 'black') {
+      boardPosition.row += 1
+    } else {
+      boardPosition.row -= 1
+    }
+    moves.push(boardPosition)
+  }
+  return moves
 }
 
 module.exports = {
@@ -108,6 +123,13 @@ module.exports = {
 
   placePiece: function(clientColor, mousePosition) {
     if(heldPiece!=null){
+      const validMoves = getValidMoves(heldPiece)
+      const attemptedMove = mouseToBoardPosition(mousePosition)
+      for(let i = 0; i < validMoves.length; i++) {
+        if(validMoves[i].row === attemptedMove.row && validMoves[i].col === attemptedMove.col) {
+          console.log(true)
+        }
+      }
       this.returnHeldPiece(clientColor)
     }
   }

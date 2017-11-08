@@ -1,7 +1,6 @@
 const Draw = (function() {
   const darkTileColor = "#B29977"
   const lightTileColor = "#FFE5C3"
-
   //loading piece images
   let imgDict = {}
   imgDict.blackpawn = new Image()
